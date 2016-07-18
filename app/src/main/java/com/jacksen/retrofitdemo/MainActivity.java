@@ -76,16 +76,18 @@ public class MainActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
         client.interceptors().add(headerInterceptor);
 
+        // 1. 创建Retrofit对象
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
 
+        // 2. 创建访问API的请求
         ApiStore apiStore = retrofit.create(ApiStore.class);
-
         Call<MobileInfo> call = apiStore.getMobileInfo(phoneNum);
 
+        // 3. 发送请求，在回调函数中处理结果
         call.enqueue(new Callback<MobileInfo>() {
             @Override
             public void onResponse(Call<MobileInfo> call, Response<MobileInfo> response) {
