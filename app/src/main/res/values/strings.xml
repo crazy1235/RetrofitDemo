@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">RetrofitDemo</string>
+
+    <string name="btn_query">查询手机号信息</string>
+
+    <string name="phone">手机号码</string>
+
+    <string name="prefix">手机号前7位</string>
+
+    <string name="operator">运营商</string>
+
+    <string name="city">所属城市</string>
+</resources>
