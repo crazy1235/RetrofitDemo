@@ -11,8 +11,6 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     private void startQuery(final String phoneNum) {
         progressDialog = ProgressDialog.show(this, null, "正在查询...");
 
-        Interceptor headerInterceptor = new Interceptor() {
+        /*Interceptor headerInterceptor = new Interceptor() {
             @Override
             public okhttp3.Response intercept(Chain chain) throws IOException {
                 okhttp3.Response response = chain.proceed(chain.request());
@@ -74,13 +72,13 @@ public class MainActivity extends AppCompatActivity {
         };
 
         OkHttpClient client = new OkHttpClient();
-        client.interceptors().add(headerInterceptor);
+        client.interceptors().add(headerInterceptor);*/
 
         // 1. 创建Retrofit对象
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
+//                .client(client)
                 .build();
 
         // 2. 创建访问API的请求
