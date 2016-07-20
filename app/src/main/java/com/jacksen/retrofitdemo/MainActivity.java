@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         // 1. 创建Retrofit对象
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
+
                 .addConverterFactory(GsonConverterFactory.create())
 //                .client(client)
                 .build();
