@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -74,12 +76,17 @@ public class MainActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
         client.interceptors().add(headerInterceptor);*/
 
+
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder client = new OkHttpClient.Builder();
+        client.addInterceptor(loggingInterceptor);
+
         // 1. 创建Retrofit对象
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
-
                 .addConverterFactory(GsonConverterFactory.create())
-//                .client(client)
+                .client(client.build())
                 .build();
 
         // 2. 创建访问API的请求
