@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView cityTv;
 
     private ProgressDialog progressDialog;
+    private Call<MobileInfo> call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 2. 创建访问API的请求
         ApiStore apiStore = retrofit.create(ApiStore.class);
-        Call<MobileInfo> call = apiStore.getMobileInfo(phoneNum);
+        call = apiStore.getMobileInfo(phoneNum);
 
         // 3. 发送请求，在回调函数中处理结果
         call.enqueue(new Callback<MobileInfo>() {
@@ -129,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "查询失败", Toast.LENGTH_SHORT).show();
             }
         });
+        call.cancel();
     }
 
     /**
@@ -143,5 +145,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        call.cancel();
     }
 }
